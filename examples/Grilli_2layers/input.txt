@@ -9,9 +9,9 @@ RESULT_FOLDER = ./results/
 
 ! --------------------DIMENSION---------------------------------
 ! cell numbers
-Mglob = 500
-Nglob = 90
-Kglob = 3
+Mglob = 250
+Nglob = 10
+Kglob = 6
 
 ! --------------------PROCESSOR NUMBER-------------------------
 PX = 5
@@ -28,8 +28,8 @@ SCREEN_INTV = 0.02
 
 ! ------------------------GRID----------------------------------
 ! grid sizes
-DX = 0.02
-DY = 0.02
+DX = 0.025
+DY = 0.025
 
 ! ---------------------VERTICAL GRID OPTION--------------------
 ! IVGRD = 1: uniform; 2: exponential
@@ -295,44 +295,65 @@ EI = 8.0e-7
 ! SlideX0,SlideY0: initial location
 ! SlideUt,SlideA0: rigid landslide kinematics
 ! SlideDens: deformable landslide density
-SlideType = RIGID_3D
+SlideType = DEFORMABLE
 SlideT = 0.082
-SlideL = 0.395
-SlideW = 0.680
+SlideL = 0.1213
+SlideW = 10.
 SlideAngle = 0.0
-SlopeAngle = 15.0
-SlideX0 = 0.0
+SlopeAngle = 35.0
+SlideX0 = 1.1987
 SlideY0 = 0.0
 SlideUt = 1.70
 SlideA0 = 1.12
-SlideDens = 2104.0
-SlideVisc = 0.00001
+SlideDens = 2500.0
+SlideVisc = 0.01
 SlideLambda = 0.5
 SlideIniU = 0.0
-Cf_ul = 0.02
+Cf_ul = 0.0
 PhiInt = 41.0
-PhiBed = 23.0
+PhiBed = 24.0
 
 ! ----------------------VISCOUS SLIDE---------------------------
 ! Slide thickness. The dimension are the same as in DEPTH_FILE
 SLIDE_FILE = slide_combine1.txt
 ! Density, kg/m^3
-SLIDE_DENSITY = 2000.0
+SLIDE_DENSITY = 1951.0
 ! Kinematic viscousity (Jiang's Ph.D. Thesis, p. 29)
 ! River coastal mud = 0.002-0.2 m^2/s
 ! Mudslide and debris flows = 0.2-0.6 m^2/s
-SLIDE_VISCOSITY = 0.1
+SLIDE_VISCOSITY = 0.01
 ! Manning's coefficient for the viscous slide
-SLIDE_ROUGHNESS = 0.1
+SLIDE_ROUGHNESS = 0.04
 ! A tiny diffusivity for the mass equation
 SLIDE_DIFF = 0.00005
 ! The minimum slide thickness, m
-SLIDE_MINTHICK = 0.01  
+SLIDE_MINTHICK = 0.000 
 
 ! --------------------RHEOLOGY-----------------------------------
-RHEOLOGY_ON = F
+RHEOLOGY_ON = T
+RHEO_OPT = GRANULAR
+
+
 Yield_Stress = 10.
 Plastic_Visc = 0.0
+OUT_H = T
+OUT_E = T
+OUT_U = F
+OUT_V = F
+OUT_W = F
+OUT_P = F
+OUT_K = F
+OUT_D = F
+OUT_S = F
+OUT_C = F
+OUT_B = F
+OUT_A = F
+OUT_T = F
+OUT_F = F
+OUT_G = T
+OUT_I = F
+OUT_Z = T
+OUT_M = T
 
 ! --------------------PROBE OUTPUT---------------------------------
 ! output variables at stations which are given in file stat.txt
@@ -360,21 +381,3 @@ PLOT_INTV_STAT = 0.01
 ! OUT_I = salinity
 ! OUT_Z = varying bathymetry
 ! OUT_M = max wave height
-OUT_H = T
-OUT_E = T
-OUT_U = F
-OUT_V = F
-OUT_W = F
-OUT_P = F
-OUT_K = F
-OUT_D = F
-OUT_S = F
-OUT_C = F
-OUT_B = F
-OUT_A = F
-OUT_T = F
-OUT_F = F
-OUT_G = T
-OUT_I = F
-OUT_Z = T
-OUT_M = F

@@ -1,6 +1,6 @@
 #-----------BEGIN MAKEFILE-------------------------------------------------
          SHELL         = /bin/sh
-         DEF_FLAGS     = -P -C -traditional 
+         DEF_FLAGS     = -P -traditional 
          EXEC          = nhwave
 #==========================================================================
 #--------------------------------------------------------------------------
@@ -9,16 +9,16 @@
 #--------------------------------------------------------------------------
          FLAG_1 = -DDOUBLE_PRECISION
          FLAG_2 = -DPARALLEL
-#        FLAG_3 = -DLANDSLIDE
+#         FLAG_3 = -DLANDSLIDE
 #         FLAG_4 = -DSALINITY
 #         FLAG_5 = -DTEMPERATURE
 #         FLAG_6 = -DBUBBLE
 #         FLAG_7 = -DSEDIMENT
 #         FLAG_8 = -DVEGETATION
-         FLAG_9 = -DINTEL
+#         FLAG_9 = -DINTEL
 #         FLAG_10 = -DBALANCE2D
 #	      FLAG_11 = -DOBSTACLE
-#	      FLAG_12 = -DTWOLAYERSLIDE
+	      FLAG_12 = -DTWOLAYERSLIDE
 #	      FLAG_13 = -DCORALREEF
 #	      FLAG_14 = -DPOROUSMEDIA
          FLAG_15 = -DFROUDE_CAP
@@ -50,8 +50,10 @@
 #--------------------------------------------------------------------------
 #  Libraries           
 #--------------------------------------------------------------------------
-         LIBS  = -L/home/1670/hypre/parallel/lib/ -lHYPRE
-         INCS  = -L/home/1670/hypre/parallel/include/
+HYPRE_PREFIX ?= /work/local/hypre
+
+LIBS = -L$(HYPRE_PREFIX)/lib -L$(HYPRE_PREFIX)/lib64 -lHYPRE
+INCS = -I$(HYPRE_PREFIX)/include
 #--------------------------------------------------------------------------
 #  Preprocessing and Compilation Directives
 #--------------------------------------------------------------------------

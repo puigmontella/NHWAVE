@@ -582,7 +582,7 @@
      do nfreq = 1,NumFreq
        Per_Wave = 1.0/Freq(nfreq)
        Segma = 2.0*pi/Per_Wave
-       call wave_dispersion(dep_wave, Segma, Wave_Number)
+       call wave_dispersion(Segma, Wave_Number)
        Wave_Length = 2.0*pi/Wave_Number
        Celerity = Wave_Length/Per_Wave
 !

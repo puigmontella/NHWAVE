@@ -48,3 +48,56 @@ plot(tm/t0,gauge4/b,'b--')
 axis([0 2.5 -0.06 0.07])
 ylabel('\eta/b')
 xlabel('t/t0')
+
+
+
+
+
+
+Ha = load([fdir 'depth_00002']);   % size: N x M
+Ha2 = load([fdir 'depth_00022']);   % size: N x M
+Ha3 = load([fdir 'depth_00024']);   % size: N x M
+[N, M] = size(Ha);
+
+dx = 0.02;   % use your DX
+dy = 0.02;   % use your DY
+
+x = ((1:M) - 0.5) * dx;   % cell-center x
+y = ((1:N) - 0.5) * dy;   % cell-center y
+[X, Y] = meshgrid(x, y);
+
+
+
+
+figure
+subplot(311)
+imagesc(x, y, Ha); axis xy equal tight
+colorbar
+title('Ha (two-layer slide thickness) at step 00001')
+xlabel('x'); ylabel('y');
+
+
+subplot(312)
+imagesc(x, y, Ha2); axis xy equal tight
+colorbar
+title('Ha (two-layer slide thickness) at step 00001')
+xlabel('x'); ylabel('y');
+
+subplot(313)
+imagesc(x, y, Ha3); axis xy equal tight
+colorbar
+title('Ha (two-layer slide thickness) at step 00001')
+xlabel('x'); ylabel('y');
+
+
+
+row = 45;
+
+figure
+plot(x, Ha(row,:), 'b-',  x, Ha2(row,:), 'r--',  x, Ha3(row,:), 'k-.');
+grid on
+axis([0 10 0 1.5])
+ylabel('Ha (m)')
+xlabel('x (m)')
+legend('Ha\_00002','Ha\_00022','Ha\_00102', 'Location','best');
+title(sprintf('Ha cross-section at j=%d', row));

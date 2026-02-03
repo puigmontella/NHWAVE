@@ -56,41 +56,39 @@
     use global
     implicit none
     integer :: i,j
-    real(SP) :: alpha0,zt
+    real(SP) :: alpha0, zt
+    real(SP) :: x1, x2, x3
 !
 !   triangle shape landslide (Kimmoun)
 !
     alpha0 = SlopeAngle*pi/180.
+
+    x1 = SlideX0
+    x3 = SlideX0 + SlideL
+    x2 = 0.5_SP*(x1 + x3)
+
+
     do j = 1,Nloc
     do i = 1,Mloc
-!
-!   Test 1
-!
-      if(xc(i)>=0.042.and.xc(i)<=0.097) then
-        zt = (xc(i)-0.042)/cos(alpha0)*tan(alpha0)
-      elseif(xc(i)>0.097.and.xc(i)<=0.152) then
-        zt = (0.152-xc(i))/sin(alpha0)
+
+      if (xc(i) >= x1 .and. xc(i) <= x2) then
+        zt = SlideT * (xc(i) - x1) / (x2 - x1)
+      elseif (xc(i) > x2 .and. xc(i) <= x3) then
+        zt = SlideT * (x3 - xc(i)) / (x3 - x2)
       else
-        zt = 0.0
+        zt = 0.0_SP
       endif
 
-! Test 2
-!      if(xc(i)>=0.015.and.xc(i)<=0.0825) then
-!        zt = (xc(i)-0.015)/cos(alpha0)*tan(alpha0)                                                                               
-!      elseif(xc(i)>0.0825.and.xc(i)<=0.15) then                                                                                  
-!        zt = (0.15-xc(i))/sin(alpha0)                                                                                           
-!      else                                                                                                                       
-!        zt = 0.0                                                                                                                 
-!      endif
-
       Ha(i,j) = zt
-      if(Ha(i,j)-0.001<=1.e-6) then                                                                                    
-        Maska(i,j) = 0                                                                                                 
-        Ha(i,j) = 0.001                                                                                                
-      endif                                                                                                            
-    enddo                                                                                                              
-    enddo                                                                                                              
-  
+      if (Ha(i,j)-0.001_SP <= 1.e-6_SP) then
+        Maska(i,j) = 0
+        Ha(i,j) = 0.001_SP
+      endif
+
+    enddo
+    enddo
+
+
     Ha0 = Ha
 
     do j = 1,Nloc
@@ -251,9 +249,9 @@
 
       Sxy = 0.5*(DelyUa(i,j)+DelxVa(i,j))
       if(Sxy.ne.0.0) then
-        SorceaX(i,j) = SorceaX(i,j)-sign(1.0,Sxy)*  & 
+        SorceaX(i,j) = SorceaX(i,j)-sign(1.0d0, Sxy)*  & 
                        (1.0-Slambda(i,j))*Grav_Lz(i,j)*Ha(i,j)*Kap(i,j)*DelyHa(i,j)*sin(PhiInt)
-        SorceaY(i,j) = SorceaY(i,j)-sign(1.0,Sxy)*  &  
+        SorceaY(i,j) = SorceaY(i,j)-sign(1.0d0, Sxy)*  &  
                        (1.0-Slambda(i,j))*Grav_Lz(i,j)*Ha(i,j)*Kap(i,j)*DelxHa(i,j)*sin(PhiInt)
       endif
     enddo
