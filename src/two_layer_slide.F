@@ -65,7 +65,8 @@
 
     x1 = SlideX0
     x3 = SlideX0 + SlideL
-    x2 = 0.5_SP*(x1 + x3)
+    ! x2 = 0.95_SP*(x1 + x3)
+    x2 = x1 + 0.95_SP*(x3-x1) 
 
 
     do j = 1,Nloc
@@ -163,7 +164,7 @@
 !
 !      DepAngx = (Hc0(i+1,j)-Hc0(i-1,j))/(2.0*dx)
 !
-      if(xc(i)<=0.3) then
+      if(xc(i)<=0.6) then
         DepAngx = SlopeAngle*pi/180.
       else
         DepAngx = 0.0

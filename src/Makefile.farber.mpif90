@@ -18,14 +18,14 @@
 #         FLAG_9 = -DINTEL
 #         FLAG_10 = -DBALANCE2D
 #	      FLAG_11 = -DOBSTACLE
-	      FLAG_12 = -DTWOLAYERSLIDE
+#	      FLAG_12 = -DTWOLAYERSLIDE
 #	      FLAG_13 = -DCORALREEF
 #	      FLAG_14 = -DPOROUSMEDIA
          FLAG_15 = -DFROUDE_CAP
 #         FLAG_16 = -DCOUPLING
 #         FLAG_17 = -DFLUIDSLIDE
 #         FLAG_18 = -DLANDSLIDE_COMPREHENSIVE
-#         FLAG_19 = -DDEFORMABLESLIDE
+         FLAG_19 = -DDEFORMABLESLIDE
 #--------------------------------------------------------------------------
 #  mpi defs 
 #--------------------------------------------------------------------------
@@ -50,7 +50,7 @@
 #--------------------------------------------------------------------------
 #  Libraries           
 #--------------------------------------------------------------------------
-HYPRE_PREFIX ?= /work/local/hypre
+HYPRE_PREFIX ?= /data/eduard/software
 
 LIBS = -L$(HYPRE_PREFIX)/lib -L$(HYPRE_PREFIX)/lib64 -lHYPRE
 INCS = -I$(HYPRE_PREFIX)/include
